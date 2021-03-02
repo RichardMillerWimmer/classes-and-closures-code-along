@@ -15,8 +15,11 @@
 
 */
 
-function count(num){
-    // Code here
+function count(num) {
+
+  return function newClosure() {
+    return ++num
+  }
 };
 
 
@@ -28,7 +31,7 @@ var newClosure = count(5);
 
 
 ////////// PROBLEM 2 //////////
-/* 
+/*
   Using closures and only the arguments from greeting and greetingClosure's invocations included below, write a function that will make the below code work
   When greetingClosure is invoked with 'Hello', it should return 'Hello Henry'
   'Henry' should be coming from the argument given to the function named greeting
@@ -36,23 +39,33 @@ var newClosure = count(5);
   ------------- CODE TO MAKE WORK ------------
   const greetingClosure = greeting('Henry');
   greetingClosure('Hello')
-  
+
 */
- 
-// Code here
-    
-    
+
+function greeting(name) {
+  function greetingClosure(greeting) {
+    return `${greeting} ${name}`
+  }
+  return greetingClosure
+};
+
+
+const greetingClosure = greeting('Henry');
+greetingClosure('Hello')
+console.log(greetingClosure('Hello'))
+
+
 
 
 // After you have created the greeting function above, uncomment the code below, but do not edit it
 
 // const greetingClosure = greeting('Henry');
 // let greet = greetingClosure('Hello')
-    
+
 
 
 ////////// PROBLEM 3 //////////
-/* 
+/*
   Here we will be creating a calculator
 
   Write a function called calculatorCreator
@@ -63,23 +76,45 @@ var newClosure = count(5);
 
 */
 
-// Code here
+function calculatorCreator() {
+  let num = 0
+  return {
+    add: function (number) {
+      return num += number
+    },
+    subtract: function (number) {
+      return num -= number
+    },
+    multiply: function (number) {
+      return num *= number
+    },
+    divide: function (number) {
+      return num /= number
+    }
+  }
+}
 
 
 
 ////////// PROBLEM 4 //////////
-/* 
+/*
   Create a class called Puppy
   The class should have a constructor that accepts three parameters: happiness, energy, and behavior
-  
+
 */
 
-// Code here
+class Puppy {
+  constructor(happiness, energy, behavior) {
+    this.happiness = happiness;
+    this.energy = energy;
+    this.behavior = behavior;
+  }
+}
 
 
 
 ////////// PROBLEM 5 //////////
-/* 
+/*
   Create a class called Car that creates two properties on each Car object
   The properties should be called manufacturer and year
   The class should also have a method called displayManufacturer that returns the manufacturer
@@ -87,19 +122,42 @@ var newClosure = count(5);
 
 */
 
-// Code here
+class Car {
+  constructor(manufacturer, year) {
+    this.manufacturer = manufacturer;
+    this.year = year;
+  }
+  displayManufacturer() {
+    return this.manufacturer
+  }
+  displayYear() {
+    return this.year
+  }
+}
 
 
 
 ////////// PROBLEM 6 //////////
-/* 
+/*
   Using the Puppy class from Problem 4 as a template, create a new class called Panda
   The class should have a constructor that accepts three parameters: happiness, energy, and behavior
-  
+
   This Panda class should also include two prototype methods:
     - getTreat: This method should increase happiness by 20 and return the new happiness value
     - takesNap: This method should decrease energy by 45 and increase behavior by 15
 
 */
 
-// Code here
+class Panda {
+  constructor(happiness, energy, behavior) {
+    this.happiness = happiness;
+    this.energy = energy;
+    this.behavior = behavior;
+  }
+  getsTreat() {
+    return this.happiness += 20
+  }
+  takesNap() {
+    return this.energy -= 45, this.behavior += 15
+  }
+}
